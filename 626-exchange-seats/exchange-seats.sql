@@ -1,23 +1,20 @@
-with cte as(
-select *,lead(id) over(order by id) as next , lag(id) over(order by id) as prev
-from seat
-)
-select case when ((id%2=1) and next is not null) then next
-when (id%2=0) then prev
-else id
-end as id, student from cte
-order by id asc;
-
-
-
-
-
-
-
-
-
-
-
+-- with cte as(
+-- select *,lead(id) over(order by id) as next , lag(id) over(order by id) as prev
+-- from seat
+-- )
+-- select case when ((id%2=1) and next is not null) then next
+-- when (id%2=0) then prev
+-- else id
+-- end as id, student from cte
+-- order by id asc;
+SELECT id,
+    CASE 
+        WHEN MOD(id, 2) = 0 THEN LAG(student) OVER (ORDER BY id)
+        WHEN LEAD(student) OVER (ORDER BY id) IS NOT NULL THEN LEAD(student) OVER (ORDER BY id)
+        ELSE student  -- Use the current student if LEAD(student) is null (last row case)
+    END AS Student
+FROM Seat
+ORDER BY id ASC;
 
 
 
