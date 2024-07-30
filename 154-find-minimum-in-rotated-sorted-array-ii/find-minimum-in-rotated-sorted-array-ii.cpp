@@ -7,6 +7,8 @@ public:
        
         while(low<=high){
             mid = (low+high)/2;
+
+           
             if(arr[mid] == arr[low] && arr[mid] == arr[high]){
                 minn = min(minn, arr[low]);
                 low++;
