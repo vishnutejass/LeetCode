@@ -6,6 +6,11 @@ public:
         int mid;
         while(low<=high){
             mid = (low+high)/2;
+            
+             if(arr[low]<=arr[high]){
+                minn = min(arr[low],minn);
+                break;
+            }
            
             if(arr[low]<=arr[mid]){
                 minn = min(minn,arr[low]);
